@@ -1,4 +1,6 @@
-package com.mchacks.firealarm.wave;
+/*
+
+package com.mchacks.firealarmproject.wave;
 
 import java.io.File;
 import java.io.IOException;
@@ -61,3 +63,4 @@ public class AudioRecording() {
 
 
 }
+*/
