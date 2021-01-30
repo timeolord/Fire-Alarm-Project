@@ -1,64 +1,63 @@
 package com.mchacks.firealarm.wave;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.InputStream;
+
+import android.os.Environment;
+import android.os.ParcelFileDescriptor;
+
 import android.media.MediaRecorder;
 
 public class AudioRecording() {
-    private static String outputFileName = null;
+    private static final int BYTE_ARRAY_SIZE = 44;
 
+    public AudioRecording() {
+        byte[] outputByteArray = new byte[BYTE_ARRAY_SIZE];
+    }
 
     private void startRecording() {
-        MediaRecorder recording = new MediaRecorder();package com.mchacks.firealarm.wave;
+        // creating byte array to output the file
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-import android.media.MediaRecorder;
+        ParcelFileDescriptor[] descriptors = ParcelFileDescriptor.createPipe();
+        ParcelFileDescriptor parcelRead = new ParcelFileDescriptor(descriptors[0]);
+        ParcelFileDescriptor parcelWrite = new ParcelFileDescriptor(descriptors[1]);
 
-        public class AudioRecording() {
-            private static String outputFileName = null;
-
-
-            private void startRecording() {
-                MediaRecorder recording = new MediaRecorder();
-                recording.setAudioSource(MediaRecorder.AudioSource.MIC);
-                recording.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP); //what output format do we want
-                recording.setOutputFile(outputFileName);
-                recording.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB); //encoder?
-
-                try {
-                    recorder.prepare();
-                } catch (IOException e) {
-                    Log.e(LOG_TAG, "prepare() failed");
-                }
-
-                recorder.start();
-
-            }
-
-            private void stopRecording() {
-                recorder.stop();
-                recorder.release(); // free up object for new recording
-                recorder = null;
-            }
-
-        }
-
+        InputStream inputStream = new ParcelFileDescriptor.AutoCloseInputStream(parcelRead);
+        // creating mediarecorder
+        MediaRecorder recording = new MediaRecorder();
         recording.setAudioSource(MediaRecorder.AudioSource.MIC);
         recording.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP); //what output format do we want
         recording.setOutputFile(outputFileName);
         recording.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB); //encoder?
-
         try {
-            recorder.prepare();
+            recording.prepare();
         } catch (IOException e) {
             Log.e(LOG_TAG, "prepare() failed");
         }
 
-        recorder.start();
+        recording.start();
+        int read;
+        byte[] data = new byte[16384];
+
+        while ((read = inputStream.read(data, 0, data.length)) != -1) {
+            byteArrayOutputStream.write(data, 0, read);
+        }
+
+        byteArrayOutputStream.flush();
+        byteArrayOutputStream.toByteArray(); // convert to byte[]
+
 
     }
 
     private void stopRecording() {
-        recorder.stop();
-        recorder.release(); // free up object for new recording
-        recorder = null;
+        recording.stop();
+        recording.release(); // free up object for new recording
+        recording = null;
+
     }
+
 
 }
