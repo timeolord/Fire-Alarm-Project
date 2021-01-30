@@ -29,7 +29,6 @@ public class AudioProcessor extends Service {
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID).setContentTitle("Audio Processor")
                 .setContentText(input).setSmallIcon(R.drawable.ic_hearing_disabled).setContentIntent(pendingIntent).build();
 
-
         startForeground(1, notification);
 
         return START_NOT_STICKY;
