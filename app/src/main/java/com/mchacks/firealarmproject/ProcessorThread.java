@@ -10,7 +10,7 @@ import com.mchacks.firealarmproject.wave.AudioRecording;
 
 import java.io.File;
 
-public class ProcessorThread implements Runnable{
+public class ProcessorThread extends Thread{
     private Context context;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -29,6 +29,5 @@ public class ProcessorThread implements Runnable{
     @RequiresApi(api = Build.VERSION_CODES.O)
     ProcessorThread(Context context){
         this.context = context;
-        run();
     }
 }

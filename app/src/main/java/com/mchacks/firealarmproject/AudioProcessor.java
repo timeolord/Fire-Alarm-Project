@@ -44,9 +44,14 @@ public class AudioProcessor extends Service {
         startForeground(1, notification);
 
 
-        ProcessorThread thread = new ProcessorThread(this);
+        Thread thread = new ProcessorThread(this);
 
-        Thread.join();
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return START_REDELIVER_INTENT;
     }
