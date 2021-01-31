@@ -1,0 +1,37 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="Settings">
+
+
+        <SwitchPreferenceCompat
+            app:summaryOn="Allow flash when a fire alarm is detected"
+            app:summaryOff="Don't allow flash when a fire alarm is detected"
+            app:defaultValue="true"
+            app:key="flash_key"
+            app:title="Flash Preference" />
+
+        <SwitchPreferenceCompat
+            app:summaryOn="Allow vibrations when a fire alarm is detected"
+            app:summaryOff="Don't allow vibrations when a fire alarm is detected"
+            app:defaultValue="true"
+            app:key="vibration_key"
+            app:title="Vibration Preference" />
+
+        <SwitchPreferenceCompat
+            app:summaryOn="Allow messages to emergency contact when a fire alarm is detected"
+            app:summaryOff="Don't allow messages to emergency contact when a fire alarm is detected"
+            app:key="text_key"
+            app:title="Text Preference" />
+
+        <EditTextPreference
+            android:id="@+id/phone_number"
+            android:defaultValue="0"
+            android:dependency="text_key"
+            android:inputType="number"
+            android:key="port"
+            android:title="Phone Numbers" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

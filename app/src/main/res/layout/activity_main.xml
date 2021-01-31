@@ -1,31 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     android:padding="16dp"
     tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/settingsID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginBottom="252dp"
+        android:text="Settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/testrunID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="76dp"
+        android:layout_marginRight="76dp"
+        android:layout_marginBottom="252dp"
+        android:onClick="startService"
+        android:text="Test Run"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/edit_text_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Input"/>
+        tools:ignore="MissingConstraints" />
 
-    <Button
-        android:onClick="startService"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start Service" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="387dp"
+        android:layout_height="299dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="56dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:onClick="stopService"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Stop Service" />
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

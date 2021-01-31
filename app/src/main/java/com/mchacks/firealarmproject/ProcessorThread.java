@@ -1,14 +1,11 @@
 package com.mchacks.firealarmproject;
 
 import android.content.Context;
-import android.media.MediaPlayer;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
 import com.mchacks.firealarmproject.wave.AudioRecording;
-
-import java.io.File;
 
 public class ProcessorThread extends Thread{
     private Context context;
@@ -23,6 +20,10 @@ public class ProcessorThread extends Thread{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        Thread thread = new ProcessorThread(context);
+        thread.start();
+
         audio.stopRecording();
     }
 

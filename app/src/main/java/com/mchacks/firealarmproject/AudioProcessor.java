@@ -4,22 +4,17 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.media.MediaPlayer;
+import android.content.pm.ServiceInfo;
 import android.os.Build;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
-import com.mchacks.firealarmproject.wave.AudioRecording;
-
-import java.io.File;
-import java.sql.Time;
-
 import static com.mchacks.firealarmproject.App.CHANNEL_ID;
 
 public class AudioProcessor extends Service {
+
     public AudioProcessor() {
     }
 
@@ -28,9 +23,10 @@ public class AudioProcessor extends Service {
         super.onCreate();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
         String input = intent.getStringExtra("Input Extra");
 
         //Creates the foreground notification
@@ -41,18 +37,12 @@ public class AudioProcessor extends Service {
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID).setContentTitle("Audio Processor")
                 .setContentText(input).setSmallIcon(R.drawable.ic_hearing_disabled).setContentIntent(pendingIntent).build();
 
-        startForeground(1, notification);
+        this.startForeground(1, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE);
 
         //Starts a new thread for recording
         Thread thread = new ProcessorThread(this);
 
         thread.start();
-        //try {
-        //    thread.join();
-        //} catch (InterruptedException e) {
-        //    e.printStackTrace();
-        //}
-
 
         return START_REDELIVER_INTENT;
     }
