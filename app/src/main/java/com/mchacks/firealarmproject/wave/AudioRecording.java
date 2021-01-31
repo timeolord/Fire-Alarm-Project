@@ -18,13 +18,17 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.core.os.EnvironmentCompat;
+
+import com.mchacks.firealarmproject.MainActivity;
 
 public class AudioRecording {
     private static final int BYTE_ARRAY_SIZE = 44;
     private static final String LOG_TAG = "AUDIO_FAILED";
-    private MediaRecorder recording;
-    private byte[] outputByteArray;
-    private static File outputFile;
+    private MediaRecorder recording = null;
+    //private byte[] outputByteArray;
+    File outputFile = null;
+
 
     public File getOutputByteArray() {
         return outputFile;
@@ -32,10 +36,13 @@ public class AudioRecording {
 
 
 
-    public AudioRecording() { byte[] outputByteArray = new byte[BYTE_ARRAY_SIZE]; }
+    public AudioRecording() {
+        //byte[] outputByteArray = new byte[BYTE_ARRAY_SIZE];
+        this.recording = new MediaRecorder();
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void startRecording()  {
+    public void startRecording() throws IllegalStateException{
         /* // creating byte array to output the file
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
@@ -50,27 +57,27 @@ public class AudioRecording {
         InputStream inputStream = new ParcelFileDescriptor.AutoCloseInputStream(parcelRead);
         */
 
-
-        File directory = Environment.getExternalStorageDirectory();
+        /*System.out.println(directory);
         try {
-            outputFile = File.createTempFile("audio","3gp",directory);
+            outputFile = File.createTempFile("tmp",".3gp",directory);
         } catch (IOException e) {
-            Log.e(LOG_TAG, "external storage access error");
+            System.out.println(e);
         }
+        */
+
         // creating media recorder
-        MediaRecorder recording = new MediaRecorder();
         recording.setAudioSource(MediaRecorder.AudioSource.MIC);
-        recording.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP); //what output format do we want or AMR_NB
-        recording.setOutputFile(outputFile);
-        recording.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB); //encoder?
+        recording.setOutputFile(MainActivity.fileName);
+        recording.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS); //what output format do we want or AMR_NB
+        recording.setAudioEncoder(MediaRecorder.AudioEncoder.AAC); //encoder?
         try {
             recording.prepare();
         } catch (IOException e) {
             Log.e(LOG_TAG, "prepare() failed");
         }
 
-        recording.start();
 
+        recording.start();
 
 
         /*int read;

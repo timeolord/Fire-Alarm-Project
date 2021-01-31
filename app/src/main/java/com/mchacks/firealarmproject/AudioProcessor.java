@@ -43,23 +43,12 @@ public class AudioProcessor extends Service {
 
         startForeground(1, notification);
 
-        //Babe
-        //ProcessorThread thread = new ProcessorThread(this);
 
+        ProcessorThread thread = new ProcessorThread(this);
 
+        Thread.join();
 
-        AudioRecording audio = new AudioRecording();
-        audio.startRecording();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        audio.stopRecording();
-        File output = audio.getOutputByteArray();
-        System.out.println(output);
-
-        return START_NOT_STICKY;
+        return START_REDELIVER_INTENT;
     }
 
     @Override
