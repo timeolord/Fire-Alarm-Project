@@ -6,6 +6,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Build;
+import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -14,7 +15,12 @@ import androidx.core.app.NotificationCompat;
 
 import com.mchacks.firealarmproject.wave.AudioRecording;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Time;
 
 import static com.mchacks.firealarmproject.App.CHANNEL_ID;
@@ -67,4 +73,35 @@ public class AudioProcessor extends Service {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+    // CONVERT AUDIO RECORDINGS TO BYTE ARRAY METHOD
+
+    public byte[] convertToByteArray(String filename) {
+
+        // input stream -> filename
+        FileInputStream inputStream = null;
+
+        try {
+            inputStream = new FileInputStream(filename);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // write filename to output stream
+        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
+
+        try {
+            while (inputStream.available() > 0) {
+                byteOutputStream.write(inputStream.read());
+            }
+        } catch (IOException exc) {
+            exc.printStackTrace();
+        }
+
+        byte[] byteArray = byteOutputStream.toByteArray(); // CONVERT TO BYTE ARRAY
+
+        return byteArray;
+
+    }
+
 }
