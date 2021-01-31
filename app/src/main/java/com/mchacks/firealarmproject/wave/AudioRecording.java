@@ -1,6 +1,9 @@
 
 package com.mchacks.firealarmproject.wave;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import android.os.Build;
 import android.media.MediaRecorder;
@@ -41,6 +44,7 @@ public class AudioRecording {
         recording = null;
 
     }
+
 
 
 }

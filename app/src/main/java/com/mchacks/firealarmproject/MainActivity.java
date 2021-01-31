@@ -73,6 +73,12 @@ public class MainActivity extends AppCompatActivity {
 
         editTextInput = findViewById(R.id.edit_text_input);
 
+        // FFT analysis
+        // byte [] audioByteArray = AudioProcessor.convertToByteArray(fileName);
+        // double audioFFT = FrequencyAnalysis.calculateFFT(audioByteArray);
+
+
+
         startService(findViewById(R.id.testrunID));
     }
 
@@ -89,8 +95,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void startService(View v){
         String input = editTextInput.getText().toString();
-
-        System.out.println("darn");
 
         Intent serviceIntent = new Intent(this, AudioProcessor.class);
         serviceIntent.putExtra("Input Extra", input);
