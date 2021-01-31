@@ -7,7 +7,9 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,6 +29,7 @@ public class TestRunActivity extends AppCompatActivity {
     private Parameters params;
     private MediaPlayer mp;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,19 +74,22 @@ public class TestRunActivity extends AppCompatActivity {
             return;
         }
 
-        for(int i =0; i<1000; i++) {
             // VIBRATION
             Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            long[] wave_time = {0, 60000};
+            int[] wave_ampl = {255, 255};
+
+            VibrationEffect vibrationEffect = null;
+            vibrationEffect = VibrationEffect.createWaveform(wave_time, wave_ampl, -1);
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 //                v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
 //            } else {
 //                //deprecated in API 26
 //                v.vibrate(500);
 //            }
-            v.vibrate(100);
+            v.vibrate(vibrationEffect);
             turnOnFlash();
             //turnOffFlash();
-        }
     }
 
     private void getCamera() {
