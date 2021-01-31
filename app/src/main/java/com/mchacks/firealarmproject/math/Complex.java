@@ -1,4 +1,4 @@
-package com.mchacks.firealarmproject;
+package com.mchacks.firealarmproject.math;
 
 /******************************************************************************
  *  Compilation:  javac Complex.java

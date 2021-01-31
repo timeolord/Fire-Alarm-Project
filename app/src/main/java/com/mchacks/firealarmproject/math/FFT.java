@@ -1,4 +1,4 @@
-package com.mchacks.firealarmproject;
+package com.mchacks.firealarmproject.math;
 
 /******************************************************************************
  *  Compilation:  javac FFT.java
@@ -30,8 +30,6 @@ package com.mchacks.firealarmproject;
  *  https://introcs.cs.princeton.edu/java/97data/InplaceFFT.java.html
  *
  ******************************************************************************/
-
-import com.mchacks.firealarmproject.Complex;
 
 public class FFT {
 
