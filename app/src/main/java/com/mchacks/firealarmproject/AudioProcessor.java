@@ -76,13 +76,13 @@ public class AudioProcessor extends Service {
 
     // CONVERT AUDIO RECORDINGS TO BYTE ARRAY METHOD
 
-    public byte[] convertToByteArray(String filename) {
+    public byte[] convertToByteArray(String inputFile) {
 
-        // input stream -> filename
+        // input stream -> input file
         FileInputStream inputStream = null;
 
         try {
-            inputStream = new FileInputStream(filename);
+            inputStream = new FileInputStream(inputFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

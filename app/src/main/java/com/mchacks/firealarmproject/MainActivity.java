@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.mchacks.firealarmproject.wave.FrequencyAnalysis;
+
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
     private EditText editTextInput;
@@ -40,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         editTextInput = findViewById(R.id.edit_text_input);
+
+        // FFT analysis
+        // byte [] audioByteArray = AudioProcessor.convertToByteArray(fileName);
+        // double audioFFT = FrequencyAnalysis.calculateFFT(audioByteArray);
+
+
     }
 
     public void startService(View v){
